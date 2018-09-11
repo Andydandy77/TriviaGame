@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'GOT';
+    src: URL('GOT.ttf') format('ttf');
+  }
+
+body {
+
+    background-image: url("../images/background.jpg");
+    background-size: 1440px 750px;
+    font-family: "GOT.ttf";
+}
+
+#back {
+
+    background-color: black;
+
+    height: 600px;
+  
+   
+    margin: 13.5% 15% 0px 15%;
+
+
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    opacity: 0.9;
+
+
+}
+
+#start {
+    height: 50px;
+    width: 100px;
+    background-color: white;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+
+#question {
+
+    margin-top: 50px;
+    padding-left: 200px;
+    padding-right: 200px;
+
+}
+
+.answer {
+    background-color: grey;
+    margin-left: 200px;
+    margin-right: 200px;
+    display:none;
+    padding-top:20px;
+    padding-bottom:20px;
+
+}
+
+.answer:hover { 
+    border-color: rgb(90, 90, 255);
+    border-style: dotted;
+}
+
+.answer:active {
+    background-color: white;
+}
+
+#srcImg {
+    display: none;
+    width: 400px;
+    height: 300px;
+    margin-left: 300px;
+}
+
+#timer {
+    display: block;
+}
