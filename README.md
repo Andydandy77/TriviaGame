@@ -30,4 +30,4 @@ Once you finish the test, your results will be show as such:
 
 As you can see, this neophyte did not study as he was instructed. However this is not the Citadel and our members are not expected to be THAT intelligent. Just get more than half right and you will pass. 
 
-# Good Luck and let Gods, old and new, be with you!
+# Good Luck and let the Gods, old and new, be with you!
