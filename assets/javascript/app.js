@@ -255,7 +255,7 @@ $(document).ready(function() {
                 $("#a3").css("display", "none");
                 $("#a4").css("display", "none");
                 timer.secondary = true;
-                timer.start(3);
+                timer.start(1);
                // console.log("updating question number")
                 game.currentQuestion++;
 

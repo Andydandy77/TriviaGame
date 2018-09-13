@@ -1,13 +1,25 @@
-@font-face {
-    font-family: 'GOT';
-    src: URL('GOT.ttf') format('ttf');
-  }
 
+h1 {
+    font-size: 36px;
+    margin: 5px;
+    
+}
+
+h2 {
+    font-size:24px;
+    margin: 5px;
+    margin-bottom:15px;
+}
+
+h3 {
+    font-size:18px;
+
+}
 body {
 
     background-image: url("../images/background.jpg");
     background-size: 1440px 750px;
-    font-family: "GOT.ttf";
+    
 }
 
 #back {
@@ -41,6 +53,7 @@ body {
 #question {
 
     margin-top: 50px;
+    margin-bottom: 40px;
     padding-left: 200px;
     padding-right: 200px;
 
@@ -53,6 +66,8 @@ body {
     display:none;
     padding-top:20px;
     padding-bottom:20px;
+    margin-bottom: 7px;
+    margin-top:7px;
 
 }
 
@@ -68,9 +83,10 @@ body {
 
 #srcImg {
     display: none;
-    width: 400px;
-    height: 300px;
-    margin-left: 300px;
+    width: 50%;
+    height: 60%;
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
 #timer {
