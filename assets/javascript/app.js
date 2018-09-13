@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+    // object declartions for the ten different questions with the question, 
+    //possible answers, the correct answer, and the source of the image
     var question1 = {
 
         question: "Which household possesses the banner of a moon and a falcon?",
@@ -79,6 +80,9 @@ $(document).ready(function() {
 
     }
 
+
+    // This is the timer object that counts down when the user is guessing or after the
+    // app displays the correct answer to change to the next question.
     var timer = {
         time : 0,
         clockRunning: false,
@@ -86,11 +90,11 @@ $(document).ready(function() {
         secondary : false,
         
 
+        // This starts the timer with a chosen time and counts down every second.
+        // It does not display a timer text when the secondary time (the timer in between questions).
         start : function(time) {
             timer.time = time;
-            console.log("start")
             if (!timer.clockRunning) {
-                console.log("secondary" + timer.secondary);
                 if (!timer.secondary) {
                     $("#timer").text("Time Remaining: " + timer.time);
                 }
@@ -103,18 +107,24 @@ $(document).ready(function() {
 
         },
 
+        // This clears the timer's intervalId and sets clockRunning to false
         stop : function() {
             clearInterval(timer.intervalId);
             timer.clockRunning = false;
         },
 
+        // This restarts the timer with 31 seconds
         reset : function() {
             this.start(31);
 
         },
 
+        // This decrements the time and displays the new time on the 'Time Remaining' div.
+        // If time runs out, it calls on game's method 'afterChoice', telling it that user did
+        // not give an answer. If the timer runs out in between questions, it hides the image and moves 
+        // on to the nexts question. If the user answers the last question, this calls on game's showResults method.
         count : function() {
-            console.log(timer.time);
+            //console.log(timer.time);
             timer.time--;
             if (!timer.secondary) {
                 $("#timer").text("Time Remaining: " + timer.time);
@@ -126,16 +136,17 @@ $(document).ready(function() {
            } else if (timer.time === 0 && timer.secondary) {
                timer.stop();
                timer.reset();
-               console.log(game.currentQuestion);
+            //   console.log(game.currentQuestion);
                $("#srcImg").hide();
 
-            if (game.currentQuestion !== 2) {
-                console.log("not done yet")
+            if (game.currentQuestion !== 10) {
+               // console.log("not done yet")
                 game.displayQuestion(game.currentQuestion);
                 timer.secondary = false;
             } else {
                 timer.secondary = false;
                 game.showResults();
+                console.log("game is over");
 
             }
              
@@ -147,7 +158,8 @@ $(document).ready(function() {
 
 
 
-
+    // The game object contains information about the game and methods to randomize the question order,
+    // display the next question, handling a user's answer, and displays the game results at the end.
     var game = {
 
         question : null,
@@ -161,7 +173,7 @@ $(document).ready(function() {
         questions: [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10],
 
 
-
+        // This randomizes the order of question objects in the game
         randomizeQuestions : function() {
             var currentIndex = this.questions.length, temporaryValue, randomIndex;
 
@@ -177,7 +189,7 @@ $(document).ready(function() {
             }
         },
 
-
+        // This dynamically displays the next question and the four answer buttons
         displayQuestion : function(index) {
             this.question = this.questions[index];
             this.answer = this.question.answer;
@@ -196,6 +208,8 @@ $(document).ready(function() {
 
         },
 
+        // This checks if the user's answer is wrong or correct, increments wrong or
+        // correct and then calls the game's afterChoice method.
         submitAnswer : function(answer) {
             // console.log(answer);
             // console.log(this.answer);
@@ -204,18 +218,21 @@ $(document).ready(function() {
             var correct = (answer === this.answer);
             if (answer === this.answer) {
                 this.numberCorrect++;
-                console.log(this.numberCorrect);
+                //console.log(this.numberCorrect);
 
 
             } else {
                 this.numberWrong++;
-                console.log(this.numberWrong);
+                //console.log(this.numberWrong);
 
             }
 
             this.afterChoice(correct,false);
         },
 
+        // This tells the user if he is wrong or correct, displays the associated image, 
+        // keeps track of which question the user is on, and starts a secondary timer,
+        // which when done transitions to the next question
         afterChoice : function(correct, timeOut) {
             //console.log("I was called");
             if (!timeOut) {
@@ -238,13 +255,17 @@ $(document).ready(function() {
                 $("#a3").css("display", "none");
                 $("#a4").css("display", "none");
                 timer.secondary = true;
-                timer.start(1);
-                console.log("updating question number")
+                timer.start(3);
+               // console.log("updating question number")
                 game.currentQuestion++;
 
         },
 
+
+        // This method displays the user's results and has different text based on how well the user did
+        // a replay button appears and the user can click it to restart the game.
         showResults : function() {
+
             timer.stop();
             var variableText = "";
             if (game.numberCorrect >= 5) {
@@ -266,33 +287,35 @@ $(document).ready(function() {
             $("#question").append(incorrect);
             $("#question").append(unanswered);
 
-            var playAgain = $("button");
+            var playAgain = $("<button id='restart'><button");
+            console.log(playAgain);
             playAgain.text("Play Again?");
             
             playAgain.show();
-            playAgain.css("display", "block");
+
+            playAgain.css("height", "50px");
+            playAgain.css("width", "100px");
+            playAgain.css("background-color" , "white");
+            playAgain.css("margin-top", "20px");
+            playAgain.css("font-weight", "bold");
             
-            console.log("button is " + playAgain);
+           // console.log("button is " + playAgain);
 
             game.currentQuestion = 0;
             game.numberCorrect = 0;
             game.numberWrong = 0;
             game.numberUnanswered = 0;
             $("#question").append(playAgain);
-            
+            $("#restart").bind().on("click", function() {
+                startGame();
 
-
-
-
+            });   
         }
-
-
-
     }
 
-
-    $("button").on("click", function() {
-        console.log("play");
+    // This starts the initializes the game and contains the on click events for each answer
+    function startGame() {
+       // console.log("play");
         $("button").hide();
         
         game.randomizeQuestions();
@@ -306,7 +329,7 @@ $(document).ready(function() {
             $("#a1").unbind().on("click", function() {
                 timer.stop();
                 var answer = game.question.answers[0];
-                console.log(answer);
+               // console.log(answer);
                 game.submitAnswer(answer);
     
             });
@@ -314,7 +337,7 @@ $(document).ready(function() {
             $("#a2").unbind().on("click", function() {
                 timer.stop();
                 var answer = game.question.answers[1];
-                console.log(answer);
+               // console.log(answer);
                 game.submitAnswer(answer);
         
 
@@ -323,7 +346,7 @@ $(document).ready(function() {
             $("#a3").unbind().on("click", function() {
                 timer.stop();
                 var answer = game.question.answers[2];
-                console.log(answer);
+               // console.log(answer);
                 game.submitAnswer(answer);
 
 
@@ -332,38 +355,20 @@ $(document).ready(function() {
             $("#a4").unbind().on("click", function() {
                 timer.stop();
                 var answer = game.question.answers[3];
-                console.log(answer);
+               // console.log(answer);
                 game.submitAnswer(answer);
 
 
             });
 
+    }
+
+    
+    $("#start").on("click", function() {
+       startGame();
+
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
