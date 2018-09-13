@@ -7,7 +7,7 @@ When you have studied the tomes Maester Aemon lent you and cleaned the troughs, 
 
 You will see this screen before starting:
 <p align="center">
-  <img src="assets/images/start.png" width="600" title="hover text">
+  <img src="assets/images/start1.png" width="600" title="hover text">
 </p>
 
 Upon clicking, a random question will appear to you. Be Hasty, young one! You only get thirty seconds to answer each questions. Below is the screen asking each question:
